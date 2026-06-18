@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Frontend Spring Boot</title>
+</head>
+<body>
+
+    <h1>Consumo API Spring Boot</h1>
+
+    <h2>Saludar</h2>
+    <button onclick="saludar()">Probar /saludar</button>
+    <p id="resultadoSaludo"></p>
+
+    <h2>Sumar dos números</h2>
+    <input type="number" id="numero1" placeholder="Número 1">
+    <input type="number" id="numero2" placeholder="Número 2">
+    <button onclick="sumar()">Sumar</button>
+    <p id="resultadoSuma"></p>
+
+    <h2>Lista desde base de datos</h2>
+    <button onclick="listar()">Consultar /lista</button>
+    <ul id="listaDatos"></ul>
+
+    <script>
+        const API_URL = "http://localhost:8091";
+
+        function saludar() {
+            fetch(`${API_URL}/saludar`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("resultadoSaludo").innerText = data;
+                })
+                .catch(error => {
+                    document.getElementById("resultadoSaludo").innerText = "Error al consumir /saludar";
+                    console.error(error);
+                });
+        }
+
+        function sumar() {
+            const numero1 = document.getElementById("numero1").value;
+            const numero2 = document.getElementById("numero2").value;
+
+            fetch(`${API_URL}/sumar?numero1=${numero1}&numero2=${numero2}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("resultadoSuma").innerText = "Resultado: " + data;
+                })
+                .catch(error => {
+                    document.getElementById("resultadoSuma").innerText = "Error al consumir /sumar";
+                    console.error(error);
+                });
+        }
+
+        function listar() {
+            fetch(`${API_URL}/lista`)
+                .then(response => response.json())
+                .then(data => {
+                    const lista = document.getElementById("listaDatos");
+                    lista.innerHTML = "";
+
+                    data.forEach(item => {
+                        const li = document.createElement("li");
+                        li.textContent = JSON.stringify(item);
+                        lista.appendChild(li);
+                    });
+                })
+                .catch(error => {
+                    console.error(error);
+                    document.getElementById("listaDatos").innerHTML = "<li>Error al consumir /lista</li>";
+                });
+        }
+    </script>
+
+</body>
+</html>
