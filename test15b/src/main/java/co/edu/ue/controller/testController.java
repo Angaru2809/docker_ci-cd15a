@@ -22,7 +22,12 @@ public class testController {
 	public String hello() {
 		return "Hola estudiantes de la 15B";
 	}
-	
+
+	@GetMapping(value="/test_ci")
+    public String ci () {
+		return "Hola desde CI con Github Actions";
+    }
+
 	@GetMapping(value="/sumar")
     public int sumar(
             @RequestParam int numero1,
