@@ -1,0 +1,32 @@
+name: CI Spring Boot Docker
+on:
+  push:
+    branches: 
+    - main 
+  
+jobs:
+  build-backend:
+    
+    
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: test15b
+
+    steps:
+    
+    - name: Descargar codigo
+      uses: actions/checkout@v4
+
+    - name: Instalar Java 21
+      uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: 21
+
+    - name: Compilar proyecto
+      run: mvnw clean package -DskipTests
+    
+    - name: Construir imagen Docker
+      run: docker build -t backend-spring .
