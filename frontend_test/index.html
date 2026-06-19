@@ -18,6 +18,14 @@
     <button onclick="sumar()">Sumar</button>
     <p id="resultadoSuma"></p>
 
+    <h2>Prueba CI/CD</h2>
+    <button onclick="testCi()">Probar /test_ci</button>
+    <p id="resultadoTestCi"></p>
+
+    <h2>Prueba despliegue continuo</h2>
+    <button onclick="prueba()">Probar /prueba</button>
+    <p id="resultadoPrueba"></p>
+
     <h2>Lista desde base de datos</h2>
     <button onclick="listar()">Consultar /lista</button>
     <ul id="listaDatos"></ul>
@@ -48,6 +56,30 @@
                 })
                 .catch(error => {
                     document.getElementById("resultadoSuma").innerText = "Error al consumir /sumar";
+                    console.error(error);
+                });
+        }
+
+        function prueba() {
+            fetch(`${API_URL}/prueba`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("resultadoPrueba").innerText = data;
+                })
+                .catch(error => {
+                    document.getElementById("resultadoPrueba").innerText = "Error al consumir /prueba";
+                    console.error(error);
+                });
+        }
+
+        function testCi() {
+            fetch(`${API_URL}/test_ci`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("resultadoTestCi").innerText = data;
+                })
+                .catch(error => {
+                    document.getElementById("resultadoTestCi").innerText = "Error al consumir /test_ci";
                     console.error(error);
                 });
         }

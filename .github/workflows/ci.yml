@@ -48,3 +48,37 @@ jobs:
         cd C:\Users\angie\proyecto_docker_compose_limpio\proyecto_docker_compose_limpio
         docker compose pull backend
         docker compose up -d backend
+
+  build-frontend:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend_test
+
+    steps:
+
+    - name: Descargar codigo
+      uses: actions/checkout@v4
+
+    - name: Login Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_TOKEN }}
+
+    - name: Contruir imagen Docker frontend
+      run: docker build -t angie28/frontend-nativo:latest .
+
+    - name: Publicar imagen frontend en Docker Hub
+      run: docker push angie28/frontend-nativo:latest
+
+  deploy-frontend:
+    needs: build-frontend
+    runs-on: self-hosted
+    steps:
+     - name: Actualizar contenedor frontend
+       run: |
+        cd C:\Users\angie\proyecto_docker_compose_limpio\proyecto_docker_compose_limpio
+        docker compose pull frontend
+        docker compose up -d frontend

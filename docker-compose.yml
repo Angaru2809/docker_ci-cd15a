@@ -33,6 +33,7 @@ services:
 
   frontend:
     build: ./frontend_test
+    image: angie28/frontend-nativo:latest
     container_name: frontend-nativo
     ports:
       - "8082:80"

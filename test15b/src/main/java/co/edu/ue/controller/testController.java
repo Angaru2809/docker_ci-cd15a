@@ -27,6 +27,10 @@ public class testController {
     public String ci () {
 		return "Hola desde CI con Github Actions";
     }
+	@GetMapping(value="/prueba")
+	public String prueba() {
+		return "Hola otra prueba de que quedo funcionando Github Actions";
+	}
 
 	@GetMapping(value="/sumar")
     public int sumar(
