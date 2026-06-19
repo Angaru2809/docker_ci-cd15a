@@ -16,12 +16,14 @@ services:
   backend:
     build: ./test15b
     container_name: backend-springboot
+    
 
     ports:
       - "8091:8080"
 
     depends_on:
       - mysql-db
+    restart: on-failure
 
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/test
