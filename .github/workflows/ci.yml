@@ -36,6 +36,6 @@ jobs:
       run: docker build -t angie28/backend-springboot:latest .
     - name: Publicar imagen en Docker Hub
       run: docker push angie28/backend-springboot:latest
-    name: Verificar JAR generado
+    - name: Verificar JAR generado
       run: ls -la target
    
