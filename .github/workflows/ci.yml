@@ -38,7 +38,7 @@ jobs:
       run: docker push angie28/backend-springboot:latest
     - name: Verificar JAR generado
       run: ls -la target
-  deploy-backend:
+  
   deploy-backend:
     needs: build-backend
     runs-on: self-hosted
