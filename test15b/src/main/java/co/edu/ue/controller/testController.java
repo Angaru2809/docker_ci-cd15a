@@ -37,6 +37,11 @@ public class testController {
 	}
 
 
+	@GetMapping(value="/despliegue")
+	public String despliegue(@RequestParam String mensaje) {
+		return "Despliegue continuo OK: " + mensaje;
+	}
+
 	@GetMapping(value="/sumar")
     public int sumar(
             @RequestParam int numero1,
@@ -44,6 +49,15 @@ public class testController {
 
         return numero1 + numero2;
     }
+
+	@GetMapping(value="/sumar3")
+	public int sumar3(
+			@RequestParam int numero1,
+			@RequestParam int numero2,
+			@RequestParam int numero3) {
+
+		return numero1 + numero2 + numero3;
+	}
 	
 	@GetMapping(value="/lista")
 	public List<Prueba> getTesting(){

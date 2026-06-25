@@ -63,6 +63,13 @@
     <button onclick="sumar()">Sumar</button>
     <p id="resultadoSuma"></p>
 
+    <h2>Sumar tres números (despliegue continuo)</h2>
+    <input type="number" id="numero3a" placeholder="Número 1">
+    <input type="number" id="numero3b" placeholder="Número 2">
+    <input type="number" id="numero3c" placeholder="Número 3">
+    <button onclick="sumar3()">Sumar 3</button>
+    <p id="resultadoSuma3"></p>
+
     <h2>Prueba CI/CD</h2>
     <button onclick="testCi()">Probar /test_ci</button>
     <p id="resultadoTestCi"></p>
@@ -74,6 +81,11 @@
     <h2>Prueba CI/CD 2</h2>
     <button onclick="testPrueba()">Probar /test_ci_prueba2</button>
     <p id="resultadoTestCiprueba"></p>
+
+    <h2>Probar despliegue continuo (input)</h2>
+    <input type="text" id="mensajeDespliegue" placeholder="Escribe un mensaje de prueba">
+    <button onclick="probarDespliegue()">Enviar a /despliegue</button>
+    <p id="resultadoDespliegue"></p>
 
     <h2>Lista desde base de datos</h2>
     <button onclick="listar()">Consultar /lista</button>
@@ -110,6 +122,22 @@
                 });
         }
 
+        function sumar3() {
+            const numero1 = document.getElementById("numero3a").value;
+            const numero2 = document.getElementById("numero3b").value;
+            const numero3 = document.getElementById("numero3c").value;
+
+            fetch(`${API_URL}/sumar3?numero1=${numero1}&numero2=${numero2}&numero3=${numero3}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("resultadoSuma3").innerText = "Resultado: " + data;
+                })
+                .catch(error => {
+                    document.getElementById("resultadoSuma3").innerText = "Error al consumir /sumar3";
+                    console.error(error);
+                });
+        }
+
         function prueba() {
             fetch(`${API_URL}/prueba`)
                 .then(response => response.text())
@@ -141,6 +169,25 @@
                 })
                 .catch(error => {
                     document.getElementById("resultadoTestCiprueba").innerText = "Error al consumir /test_ci_prueba2";
+                    console.error(error);
+                });
+        }
+
+        function probarDespliegue() {
+            const mensaje = document.getElementById("mensajeDespliegue").value;
+
+            if (!mensaje.trim()) {
+                document.getElementById("resultadoDespliegue").innerText = "Escribe un mensaje primero";
+                return;
+            }
+
+            fetch(`${API_URL}/despliegue?mensaje=${encodeURIComponent(mensaje)}`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("resultadoDespliegue").innerText = data;
+                })
+                .catch(error => {
+                    document.getElementById("resultadoDespliegue").innerText = "Error al consumir /despliegue";
                     console.error(error);
                 });
         }
