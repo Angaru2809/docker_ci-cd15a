@@ -67,7 +67,7 @@
     <input type="number" id="numero3a" placeholder="Número 1">
     <input type="number" id="numero3b" placeholder="Número 2">
     <input type="number" id="numero3c" placeholder="Número 3">
-    <button onclick="sumar3()">Sumar 3</button>
+    <button onclick="sumartres()">Sumar 3</button>
     <p id="resultadoSuma3"></p>
 
     <h2>Prueba CI/CD</h2>
@@ -122,12 +122,12 @@
                 });
         }
 
-        function sumar3() {
+        function sumartres() {
             const numero1 = document.getElementById("numero3a").value;
             const numero2 = document.getElementById("numero3b").value;
             const numero3 = document.getElementById("numero3c").value;
 
-            fetch(`${API_URL}/sumar3?numero1=${numero1}&numero2=${numero2}&numero3=${numero3}`)
+            fetch(`${API_URL}/sumartres?numero1=${numero1}&numero2=${numero2}&numero3=${numero3}`)
                 .then(response => response.text())
                 .then(data => {
                     document.getElementById("resultadoSuma3").innerText = "Resultado: " + data;
