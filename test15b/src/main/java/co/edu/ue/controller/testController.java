@@ -33,7 +33,7 @@ public class testController {
 	}
 	@GetMapping(value="/test_ci_prueba2")
 	public String ciPrueba2() {
-		return "Hola mira si funciona esto";
+		return "Hola mira si funciona esto 2";
 	}
 
 
