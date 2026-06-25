@@ -50,8 +50,8 @@ public class testController {
         return numero1 + numero2;
     }
 
-	@GetMapping(value="/sumar2)
-	public int sumar3(
+	@GetMapping(value="/sumartres")
+	public int sumartres(
 			@RequestParam int numero1,
 			@RequestParam int numero2,
 			@RequestParam int numero3) {
