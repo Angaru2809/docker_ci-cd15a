@@ -71,6 +71,10 @@
     <button onclick="prueba()">Probar /prueba</button>
     <p id="resultadoPrueba"></p>
 
+    <h2>Prueba CI/CD 2</h2>
+    <button onclick="testPrueba()">Probar /test_ci_prueba2</button>
+    <p id="resultadoTestCiprueba"></p>
+
     <h2>Lista desde base de datos</h2>
     <button onclick="listar()">Consultar /lista</button>
     <ul id="listaDatos"></ul>
@@ -126,6 +130,17 @@
                 })
                 .catch(error => {
                     document.getElementById("resultadoTestCi").innerText = "Error al consumir /test_ci";
+                    console.error(error);
+                });
+        }
+        function testPrueba() {
+            fetch(`${API_URL}/test_ci_prueba2`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("resultadoTestCiprueba").innerText = data;
+                })
+                .catch(error => {
+                    document.getElementById("resultadoTestCiprueba").innerText = "Error al consumir /test_ci_prueba2";
                     console.error(error);
                 });
         }
